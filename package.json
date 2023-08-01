@@ -6,8 +6,5 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.mjs"
-  },
-  "dependencies": {
-    "ssh2-sftp-client": "^9.1.0"
   }
 }
