@@ -25,6 +25,7 @@ createServer((req, res) => {
       const latestFile = data[0].name;
       console.log(latestFile);
       res.write(latestFile);
+      sftp.end();
       // return sftp.get(`/Home/000_0ry94_netsuite/outbound/${latestFile}`);
     })
     .catch(err => {
