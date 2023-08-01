@@ -24,9 +24,18 @@ createServer((req, res) => {
       });
       const latestFile = data[0].name;
       console.log(latestFile);
-      res.write(latestFile);
+      res.write(JSON.stringify(jsonObj));
+      return sftp.get(`/Home/000_0ry94_netsuite/outbound/${latestFile}`);
+    })
+    .then(data => {
+      console.log(JSON.stringify(data));
+      return csv().fromString(data.toString());
+    })
+    .then((jsonObj) => {
+      console.log(JSON.stringify(jsonObj));
+      res.write(JSON.stringify(jsonObj));
       sftp.end();
-      // return sftp.get(`/Home/000_0ry94_netsuite/outbound/${latestFile}`);
+      res.end();
     })
     .catch(err => {
       console.error(err.message);
@@ -34,14 +43,4 @@ createServer((req, res) => {
       sftp.end();
       res.end();
     });
-    /* .then(data => {
-      // console.log(JSON.stringify(data));
-      return csv().fromString(data.toString());
-    })
-    .then((jsonObj) => {
-      // console.log(JSON.stringify(jsonObj));
-      res.write(JSON.stringify(jsonObj));
-      sftp.end();
-      res.end();
-    }) */
 }).listen(process.env.PORT);
