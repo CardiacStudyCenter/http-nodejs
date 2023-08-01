@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "ssh2-sftp-client": "^9.1.0",
-    "csv-file-to-json": "4.0.5"
+    "csvtojson": "^2.0.10"
   }
 }
